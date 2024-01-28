@@ -31,7 +31,7 @@ export const OffCanvasMenu = () => {
           </li>
 
           <li className="transition-colors hover:text-amber-600">
-            <Link href="/" title="Contact us">
+            <Link href="/contact" title="Contact us">
               Contact Us
             </Link>
           </li>
