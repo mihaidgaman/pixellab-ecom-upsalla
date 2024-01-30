@@ -1,6 +1,7 @@
 import { useProducts } from "@/components/hooks";
 import { ProductTile } from "./ProductTile";
 import { css } from "@emotion/css";
+import SpinnerLoading from "./SpinnerLoading";
 
 export const ProductGrid = () => {
   const { products, loading } = useProducts();
@@ -16,7 +17,11 @@ export const ProductGrid = () => {
   `;
 
   if (loading) {
-    return <div className="container mx-auto px-4">...loading</div>;
+    return (
+      <div className="container mx-auto px-4">
+        <SpinnerLoading></SpinnerLoading>
+      </div>
+    );
   }
 
   return (
