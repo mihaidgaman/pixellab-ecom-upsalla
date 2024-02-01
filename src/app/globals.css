@@ -56,3 +56,14 @@ body {
     width: var(--desktopHeaderSize);
   }
 }
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.spinner-container {
+  text-align: center;
+}
