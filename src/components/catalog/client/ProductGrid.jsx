@@ -1,18 +1,15 @@
-import { useProducts } from "@/components/hooks";
+import { useProducts } from "@/hooks";
 import { ProductTile } from "./ProductTile";
 import { css } from "@emotion/css";
 import SpinnerLoading from "./SpinnerLoading";
-import { useEffect, useState } from "react";
-
-const perPage = 8;
-let page = 1;
+import { useContext, useEffect, useState } from "react";
+import { uiContext } from "@/contexts";
 
 export const ProductGrid = () => {
+  const { itemsPerRow, pagination } = useContext(uiContext);
+  const { perPage, page } = pagination;
   const { products, loading, error } = useProducts();
   const [paginatedProducts, setPaginatedProducts] = useState([]);
-  const [perPage, setPerPage] = useState(8);
-  const [page, setPage] = useState(1);
-  const itemsPerRow = 2;
 
   useEffect(() => {
     const newPaginatedProducts = products
@@ -25,6 +22,7 @@ export const ProductGrid = () => {
   const gridCssClass = css`
     display: grid;
     row-gap: 32px;
+    margin-bottom: 64px;
 
     @media (min-width: 1024px) {
       grid-template-columns: repeat(${itemsPerRow}, 1fr);
@@ -43,8 +41,6 @@ export const ProductGrid = () => {
     return <div className="container mx-auto px-4">{error}</div>;
   }
 
-  const pageCount = Math.ceil(products.length / perPage);
-
   return (
     <>
       <ul className={gridCssClass}>
@@ -57,31 +53,6 @@ export const ProductGrid = () => {
             </li>
           );
         })}
-      </ul>
-
-      <ul className="flex items-center justify-center gap-4">
-        {Array(pageCount)
-          .fill(` `)
-          .map((_, index) => {
-            const pageIndex = index + 1;
-
-            return (
-              <li key={index}>
-                <button
-                  type="button"
-                  title={`Page ${pageIndex}`}
-                  className={`border-zinc-200 p-2 hover:bg-black hover:text-white transition-colors ${
-                    pageIndex === page ? "bg-black text-white" : ""
-                  }`}
-                  onClick={() => {
-                    setPage(pageIndex);
-                  }}
-                >
-                  {pageIndex}
-                </button>
-              </li>
-            );
-          })}
       </ul>
     </>
   );

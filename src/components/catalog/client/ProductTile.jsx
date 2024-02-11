@@ -1,6 +1,6 @@
+import { AddToCart } from "@/components/cart/client";
 import Image from "next/image";
 import Link from "next/link";
-import AddToCartButton from "@/components/hooks/AddToCartButton";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 const renderRating = (rating) => {
@@ -53,7 +53,7 @@ export const ProductTile = (props) => {
 
         <footer>
           <div>
-            <AddToCartButton></AddToCartButton>
+            <AddToCart product={product}></AddToCart>
           </div>
         </footer>
       </section>

@@ -1,5 +1,7 @@
+import { baseUrl } from "@/index";
 import { useEffect, useState } from "react";
 
+// the naivest cache
 let cache = [];
 
 export const useProducts = () => {
@@ -10,7 +12,7 @@ export const useProducts = () => {
   useEffect(() => {
     if (cache.length === 0) {
       // fetch returns a promise
-      fetch("https://fakestoreapi.com/products")
+      fetch(`${baseUrl}/products`)
         .then((response) => {
           // response.json() returns a promise
           return response.json();
@@ -18,15 +20,18 @@ export const useProducts = () => {
         .then((products) => {
           cache = products;
           setProducts(products);
+
           setLoading(false);
         })
         .catch((error) => {
           console.dir(error);
           setLoading(false);
+
           setError(`An error has occured`);
         });
     } else {
       setProducts(cache);
+
       setLoading(false);
     }
   }, []);

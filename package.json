@@ -18,7 +18,7 @@
     "react-loader-spinner": "^6.1.6",
     "react-spinners": "^0.13.8",
     "react-spinners-css": "^2.0.1",
-    "usehooks-ts": "^2.9.4"
+    "usehooks-ts": "^2.12.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
