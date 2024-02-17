@@ -2,14 +2,14 @@ import {
   CartControls,
   CartDisplay,
   CartTotals,
-} from "@/components/cart/client";
+} from '@/components/cart/client';
+import { ContinueShopping } from '@/components/ui/server';
 
 export default function CartPage() {
   return (
     <div className="container px-4 mx-auto">
-      <header className="flex justify-end">
-        {/* homework add back to shop button ContinueShopping.jsx */}
-
+      <header className="flex justify-end text-zinc-400">
+        <ContinueShopping></ContinueShopping>
         <CartControls></CartControls>
       </header>
 

@@ -1,3 +1,4 @@
-"use client";
+'use client';
 
-export * from "./Separator";
+export * from './Separator';
+export * from './ContinueShopping';
