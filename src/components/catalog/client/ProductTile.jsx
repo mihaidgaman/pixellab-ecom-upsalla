@@ -1,7 +1,7 @@
-import { AddToCart } from "@/components/cart/client";
-import Image from "next/image";
-import Link from "next/link";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import { AddToCart } from '@/components/cart/client';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 
 const renderRating = (rating) => {
   const fullStars = Math.floor(rating.rate);
@@ -11,7 +11,7 @@ const renderRating = (rating) => {
   return (
     <div className="flex justify-center text-orange-400">
       {Array(fullStars).fill(<FaStar />)}
-      {halfStar ? <FaStarHalfAlt /> : ""}
+      {halfStar ? <FaStarHalfAlt /> : ''}
       {Array(emptyStars).fill(<FaRegStar />)}
     </div>
   );
@@ -32,8 +32,8 @@ export const ProductTile = (props) => {
             height={200}
             src={imageUrl}
             alt={`Image for product ${title}`}
-            objectFit="contain"
-            className="inline"
+            className="inline object-contain w-52 h-52"
+            priority
           ></Image>
         </Link>
       </header>
