@@ -11,15 +11,15 @@
 }
 
 body {
-  @apply text-neutral-400;
+  @apply text-black;
 }
 
 .layout-grid {
   display: grid;
   min-height: 100dvh;
   grid-template-areas:
-    "header"
-    "main-area";
+    'header'
+    'main-area';
   grid-template-rows: var(--mobileHeaderHeight) 1fr;
 }
 
@@ -43,7 +43,7 @@ body {
 
 @media (min-width: 1024px) {
   .layout-grid {
-    grid-template-areas: "header main-area";
+    grid-template-areas: 'header main-area';
     grid-template-columns: var(--desktopHeaderSize) 1fr;
     grid-template-rows: 1fr;
   }
