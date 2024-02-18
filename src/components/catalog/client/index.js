@@ -4,4 +4,3 @@ export * from './ProductGrid';
 export * from './ProductTile';
 export * from './GridControls';
 export * from './Pagination';
-export * from './ProductReview';
