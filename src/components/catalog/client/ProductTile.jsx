@@ -24,8 +24,8 @@ export const ProductTile = (props) => {
   const productUrl = `/products/${id}`;
 
   return (
-    <article className="w-full flex flex-col items-center justify-between gap-4 text-center">
-      <header>
+    <article className="w-full h-full flex flex-col items-center justify-between gap-4 animate-fadeIn pb-8 hover:scale-105 transition-transform duration-300">
+      <header className="text-center flex flex-col gap-4 h-full justify-center">
         <Link href={productUrl} title={title}>
           <Image
             width={200}

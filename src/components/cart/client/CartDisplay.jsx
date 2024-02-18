@@ -1,7 +1,8 @@
 import { cartContext } from '@/contexts';
 import { useContext } from 'react';
-import { CartLineItem } from '.';
+
 import { BiLoaderCircle } from 'react-icons/bi';
+import { CartLineItem } from '.';
 
 export const CartDisplay = () => {
   const { cartProducts, loading } = useContext(cartContext);
@@ -23,10 +24,10 @@ export const CartDisplay = () => {
         <tr className="uppercase text-gray-400">
           <th></th>
           <th></th>
-          <th className="font-normal px-2">Product</th>
-          <th className="font-normal px-2">Price</th>
-          <th className="font-normal px-2">Quantity</th>
-          <th className="font-normal px-2">Total</th>
+          <th className="font-normal px-2 text-black">Product</th>
+          <th className="font-normal px-2 text-black">Price</th>
+          <th className="font-normal px-2 text-black">Quantity</th>
+          <th className="font-normal px-2 text-black">Total</th>
         </tr>
       </thead>
 
@@ -34,7 +35,7 @@ export const CartDisplay = () => {
         {cartProducts.map((cartProduct) => {
           return (
             <CartLineItem
-              key={cartContext.ProductId}
+              key={cartProduct.productId}
               product={cartProduct}
             ></CartLineItem>
           );

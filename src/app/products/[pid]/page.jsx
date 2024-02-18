@@ -1,7 +1,13 @@
+import {
+  AddToCart,
+  CartControls,
+  ContinueShopping,
+} from '@/components/cart/client';
+import { RelatedProducts } from '@/components/catalog/client';
+import StarRating from '@/components/ui/server/StarRating';
 import { baseUrl } from '@/index';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { CiStar } from 'react-icons/ci';
 
 const getProduct = async (productId) => {
   return fetch(`${baseUrl}/products/${productId}`)
@@ -15,67 +21,73 @@ const getProduct = async (productId) => {
 
 export default async function ProductPage({ params }) {
   const productId = params.pid;
-  const product = await getProduct(productId);
-  const {
-    image: imageUrl,
-    title,
-    productId: id,
-    rating,
-    price,
-    description,
-  } = product;
+  const product = await fetch(
+    `https://fakestoreapi.com/products/${productId}`,
+  ).then((res) => res.json());
 
   return (
-    <div className="container px-4">
-      <header></header>
+    <>
+      <title>{product.title}</title>
 
-      <section className="mt-16 mb-32 container px-4 lg:px-0 mx-auto grid gap-8 lg:grid-cols-12">
-        <div className="lg:col-start-1 lg:col-span-5">
-          <Image
-            width={408}
-            height={408}
-            src={imageUrl}
-            alt={`Image for product ${title}`}
-            className="inline object-contain"
-            priority
-          ></Image>
-        </div>
+      <div className="container px-4 mx-auto">
+        <header className="container px-4 lg:px-0 mx-auto flex justify-between">
+          <ContinueShopping></ContinueShopping>
 
-        <div className="lg:col-start-7 lg:col-span-6 pt-12 flex flex-col items-center justify-center lg:items-start lg:justify-start">
-          <header className="flex flex-col items-center justify-center lg:items-start lg:justify-start">
-            <h1 className="text-2xl uppercase font-medium">
-              Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops
-            </h1>
-          </header>
-          <section className="flex items-center justify-center">
-            <button type="button" className="transition-colors text-black">
-              <CiStar></CiStar>
-            </button>
-            <button type="button" className="transition-colors text-black">
-              <CiStar></CiStar>
-            </button>
-            <button type="button" className="transition-colors text-black">
-              <CiStar></CiStar>
-            </button>
-            <button type="button" className="transition-colors text-zinc-400">
-              <CiStar></CiStar>
-            </button>
-            <button type="button" className="transition-colors text-zinc-400">
-              <CiStar></CiStar>
-            </button>
+          <CartControls></CartControls>
+        </header>
 
-            <span className="ml-4">3 Stars</span>
-            <span className="ml-4">(120 Reviwes)</span>
-          </section>
-          <div className="mt-12">
-            Your perfect pack for everyday use and walks in the forest. Stash
-            your laptop (up to 15 inches) in the padded sleeve, your everyday
+        <section className="mt-16 mb-32 container px-4 lg:px-0 mx-auto grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-start-1 lg:col-span-5">
+            <Image
+              width={408}
+              height={408}
+              src={product.image}
+              alt={product.title}
+            />
           </div>
-          <span className="text-3xl leading-9 font-bold mt-12">$109.95</span>
-          <footer className="mt-12"></footer>
-        </div>
-      </section>
-      <section></section>
-    </div>
+          <div className="lg:col-start-7 lg:col-span-6 pt-12 flex flex-col items-center justify-center lg:items-start lg:justify-start">
+            <section className=" flex flex-col items-center justify-center lg:items-start lg:justify-start">
+              <h1 className="text-2xl uppercase font-medium">
+                {product.title}
+              </h1>
+              <div className="flex items-center justify-center">
+                <StarRating rating={product.rating}></StarRating>
+                <div className="pl-4">
+                  {product.rating.rate} Stars ({product.rating.count} Reviwes)
+                </div>
+              </div>
+            </section>
+
+            <section className="pt-12 text-base">
+              <p>{product.description}</p>
+
+              <p className="text-3xl leading-9 font-bold pt-12 text-black">
+                ${product.price}
+              </p>
+            </section>
+
+            <section className="pt-12">
+              <AddToCart product={product}></AddToCart>
+            </section>
+          </div>
+        </section>
+
+        <hr />
+
+        <section className="container px-4 lg:px-0 mx-auto mt-16">
+          <section className="flex flex-col gap-5 mb-16">
+            <h1 className="text-center uppercase font-medium text-xl">
+              Related Products
+            </h1>
+            <div>
+              <RelatedProducts
+                category={product.category}
+                currentProductId={product.id}
+              ></RelatedProducts>
+            </div>
+          </section>
+        </section>
+      </div>
+    </>
   );
 }
