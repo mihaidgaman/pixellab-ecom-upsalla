@@ -34,8 +34,7 @@ export const RelatedProducts = ({ category, currentProductId }) => {
                       alt={product.title}
                       width={200}
                       height={200}
-                      objectFit="contain"
-                      className="inline"
+                      className="inline object-contain w-52 h-52"
                     />
                   </Link>
                 </div>
